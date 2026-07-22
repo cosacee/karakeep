@@ -24,8 +24,8 @@ jobs:
           - image: workers
             name: custom-karakeep-workers
             target: workers
-            tags_latest: ghcr.io/<your-namespace>/karakeep-workers:latest
-            tags_release: ghcr.io/<your-namespace>/karakeep-workers:${{ github.event.release.name }},ghcr.io/<your-namespace>/karakeep-workers:release
+            tags_latest: ghcr.io/cosacee/karakeep-workers:latest
+            tags_release: ghcr.io/cosacee/karakeep-workers:${{ github.event.release.name }},ghcr.io/cosacee/karakeep-workers:release
     runs-on: ${{ matrix.os }}
     permissions:
       packages: write
@@ -86,8 +86,8 @@ jobs:
           platforms: ${{ matrix.platform }}
           push: true
           tags: ${{ steps.tags.outputs.all }}
-          cache-from: type=registry,ref=ghcr.io/<your-namespace>/karakeep-build-cache:${{ matrix.target }}-${{ matrix.suffix }}
-          cache-to: type=registry,mode=max,ref=ghcr.io/<your-namespace>/karakeep-build-cache:${{ matrix.target }}-${{ matrix.suffix }}
+          cache-from: type=registry,ref=ghcr.io/cosacee/karakeep-build-cache:${{ matrix.target }}-${{ matrix.suffix }}
+          cache-to: type=registry,mode=max,ref=ghcr.io/cosacee/karakeep-build-cache:${{ matrix.target }}-${{ matrix.suffix }}
 
   manifest:
     needs: build
@@ -100,8 +100,8 @@ jobs:
       matrix:
         include:
           - name: custom-karakeep-workers
-            tags_latest: ghcr.io/<your-namespace>/karakeep-workers:latest
-            tags_release: ghcr.io/<your-namespace>/karakeep-workers:${{ github.event.release.name }},ghcr.io/<your-namespace>/karakeep-workers:release
+            tags_latest: ghcr.io/cosacee/karakeep-workers:latest
+            tags_release: ghcr.io/cosacee/karakeep-workers:${{ github.event.release.name }},ghcr.io/cosacee/karakeep-workers:release
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
